@@ -1,0 +1,29 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+.container-main {
+    background: linear-gradient(to bottom right, #d9534f, #c9302c);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.form-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+}
+.btn-blue {
+    background: #2196f3;
+    color: white;
+    border: none;
+}
+.btn-red-outline {
+    background: transparent;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+}

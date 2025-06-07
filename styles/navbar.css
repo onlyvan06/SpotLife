@@ -1,0 +1,40 @@
+
+.navbar-custom {
+    background: linear-gradient(to right, #77CDFF, #0D92F4);
+    border-bottom: solid 0.6vh #F95454;
+    height: 12vh;
+}
+
+.logo {
+    font-weight: 300;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.08);
+}
+
+.logo span {
+    color: #ff4c4c;
+}
+
+.nav-link {
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #F95454;
+    transform: scale(1.08);
+}
+
+ul {
+    font-weight: 300;
+    gap: 0.1rem;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+}

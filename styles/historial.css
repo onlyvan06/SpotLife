@@ -1,0 +1,15 @@
+html, body {
+    height: 100vh;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.donar-btn {
+    background: linear-gradient(to right, #5cc2ff, #2196f3);
+    color: white;
+    border: none;
+    padding: 10px 30px;
+}

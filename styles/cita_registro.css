@@ -1,0 +1,50 @@
+body {
+    background:linear-gradient(to bottom right, #5cc2ff, #2196f3);
+    margin: 0; /* Elimina el margen predeterminado del body */
+    height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+}
+.header {
+    background-color: #0D92F4;/* Azul más oscuro para la barra superior */
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+.container {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    margin: 80px auto; /* Centra el contenedor y agrega margen superior e inferior */
+    flex-grow: 1; /* Permite que el contenedor crezca para ocupar el espacio restante */
+    display: flex;
+    flex-direction: column; /* Apila el contenido del contenedor verticalmente */
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="time"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.form-group input[type="radio"] {
+    margin-right: 5px;
+}
+.buttons {
+    text-align: right;
+    margin-top: auto; /* Empuja los botones hacia la parte inferior del contenedor */
+}
+.buttons button {
+    margin-left: 10px;
+}

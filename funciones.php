@@ -58,16 +58,64 @@ function registrarHospital($nombre_hospital, $correo, $direccion, $telefono, $co
     }
 }
 
+function registrarDonantes($personas, $tipo_sangre, $centro_donacion, $id_usuario)
+{
+    global $conn;
+    try {
+        $sql = "INSERT INTO solicitudes(personas, estado, fecha_registro, id_centro, id_tipo_sangre, id_usuario) VALUES(?, 'PENDIENTES', NOW(), ?, ?, ?);";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$personas, $tipo_sangre, $centro_donacion, $id_usuario]);
+        return true; //retornamos true si se registró correctamente
+    } catch (PDOException $e) {
+        return false; // Si ocurre un error, regresamos false
+    }
+}
+
+function registrarCampania($titulo, $descripcion, $fecha_inicio, $fecha_fin, $centro_donacion)
+{
+    global $conn;
+    try {
+        $sql = "INSERT INTO campanias(titulo, descripcion, fecha_inicio, fecha_fin, id_centro_donacion) VALUES(?, ?, ?, ?, ?);";
+        $stmt = $conn->prepare(query: $sql);
+        $stmt->execute([$titulo, $descripcion, $fecha_inicio, $fecha_fin, $centro_donacion]);
+        return true; //retornamos true si se registró correctamente
+    } catch (PDOException $e) {
+        return false; // Si ocurre un error, regresamos false
+    }
+}
+
 function validarUsuario($correo)
 {
     global $conn;
-    $sql = "SELECT id_usuario, correo, contraseña, rol FROM usuarios where correo = ?;";
+    // Primero buscamos el usuario y que este exista
+    $sql = "SELECT * FROM usuarios WHERE correo = ?;";
     $stmt = $conn->prepare($sql);
     $stmt->execute([$correo]);
     if ($stmt->rowCount() > 0) {
-        return $stmt->fetch(PDO::FETCH_ASSOC); //retorna el usuario si existe
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Despues si es usuario normal (rol 1), busca los datos extra que necesitamos para guardar en la sesión del usuario
+        if ($usuario['rol'] == 1) {
+            $sql2 = "SELECT un.id_tipo_sangre, un.nombre, ts.grupo_sanguineo FROM usuarios_normal as un JOIN tipos_sangre as ts ON un.id_tipo_sangre = ts.id_tipo_sangre WHERE un.id_usuario = ?";
+            $stmt2 = $conn->prepare($sql2);
+            $stmt2->execute([$usuario['id_usuario']]);
+            if ($stmt2->rowCount() > 0) {
+                $extra = $stmt2->fetch(PDO::FETCH_ASSOC);
+                $usuario = array_merge($usuario, $extra);
+            }
+        }
+        // E igual con el hospital, si es hospital (rol 2), busca los datos extra que se van a guardar en la sesión del hospital
+        if ($usuario['rol'] == 2) {
+            $sql2 = "SELECT nombre_hospital, aprobacion FROM hospitales WHERE id_usuario = ?";
+            $stmt2 = $conn->prepare($sql2);
+            $stmt2->execute([$usuario['id_usuario']]);
+            if ($stmt2->rowCount() > 0) {
+                $extra = $stmt2->fetch(PDO::FETCH_ASSOC);
+                $usuario = array_merge($usuario, $extra);
+            }
+        }
+        return $usuario;
     } else {
-        return false; //retorna false si no existe el usuario
+        return false;
     }
 }
 
@@ -80,6 +128,19 @@ function existeCorreo($correo)
     $stmt->execute([$correo]);
     $rows = $stmt->fetch(PDO::FETCH_ASSOC);
     return $rows && $rows['total_correos'] > 0; // Devuelve true si el correo ya existe, false en caso contrario
+}
+
+function obtenerCentrosDonacion()
+{
+    global $conn;
+    $sql = "SELECT * FROM centros_donacion;";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); //retorna todos los centros de donación si existen
+    } else {
+        return null; //retorna null si no existen centros de donación
+    }
 }
 
 function obtenerCampanias()

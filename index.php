@@ -18,32 +18,42 @@ session_start();
     <link rel="stylesheet" href="styles/index.css">
 </head>
 
-<body>
+<?php
+include_once 'funciones.php';
 
-    <?php
-    include_once 'funciones.php';
+$correo = isset($_POST['correo']) ? $_POST['correo'] : "";
+$contrasenia = isset($_POST['contra']) ? $_POST['contra'] : "";
+$mensaje = "";
 
-    $correo = isset($_POST['correo']) ? $_POST['correo'] : "";
-    $contrasenia = isset($_POST['contra']) ? $_POST['contra'] : "";
-    $mensaje = "";
+if (isset($_POST['correo']) && $correo <> "" && isset($_POST['contra']) && $contrasenia <> "") {
+    $usuario = validarUsuario($correo);
 
-    if (isset($_POST['correo']) && $correo <> "" && isset($_POST['contra']) && $contrasenia <> "") {
-        $usuario = validarUsuario($correo);
-        if (is_array($usuario) && isset($usuario['id_usuario']) && isset($usuario['correo']) && isset($usuario['rol']) && isset($usuario['contraseña'])) {
-            
-            if ($contrasenia != $usuario['contraseña']) {
-                $mensaje = "<div class='alert alert-danger'>Contraseña incorrecta.</div>";
-            } else {
-                $_SESSION['id_usuario'] = $usuario['id_usuario'];
-                $_SESSION['correo'] = $usuario['correo'];
-                $_SESSION['rol'] = $usuario['rol'];
-                header("Location: inicio.php");
-            }
+    if (is_array($usuario) && isset($usuario['id_usuario']) && isset($usuario['correo']) && isset($usuario['rol']) && isset($usuario['contraseña'])) {
+
+        if ($contrasenia != $usuario['contraseña']) {
+            $mensaje = "<div class='alert alert-danger'>Contraseña incorrecta.</div>";
         } else {
-            $mensaje = "<div class='alert alert-danger'>Correo no registrado.</div>";
+            $_SESSION['id_usuario'] = $usuario['id_usuario'];
+            $_SESSION['correo'] = $correo;
+            $_SESSION['rol'] = $usuario['rol'];
+
+            $_SESSION['id_tipo_sangre'] = $usuario['id_tipo_sangre'] ?? null;
+            $_SESSION['nombre'] = $usuario['nombre'] ?? null;
+            $_SESSION['grupo_sanguineo'] = $usuario['grupo_sanguineo'] ?? null;
+            $_SESSION['nombre_hospital'] = $usuario['nombre_hospital'] ?? null;
+            $_SESSION['aprobacion'] = $usuario['aprobacion'] ?? null;
+
+            header("Location: inicio.php");
+            exit;
+
         }
+    } else {
+        $mensaje = "<div class='alert alert-danger'>Correo no registrado.</div>";
     }
-    ?>
+}
+?>
+
+<body>
     <div class="row g-0">
         <!-- Lado izquierdo -->
         <div class="col-md-7 left text-center align-items-center">

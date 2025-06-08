@@ -1,9 +1,5 @@
 <?php
-session_start();
-
-if (isset($_SESSION['id_usuario']) && isset($_SESSION['rol'])) {
-    $rol = $_SESSION['rol'];
-}
+ require_once 'validar_sesion.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,7 +14,6 @@ if (isset($_SESSION['id_usuario']) && isset($_SESSION['rol'])) {
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles/registro.css">
     <link rel="stylesheet" href="styles/navbar.css">
     <style>
         html,
@@ -49,7 +44,7 @@ if (isset($_SESSION['id_usuario']) && isset($_SESSION['rol'])) {
 
 <body>
     <?php
-    include("navbar.html");
+    include("navbar.php");
     ?>
     <!-- Sección principal -->
     <div class="main-section">
@@ -57,6 +52,7 @@ if (isset($_SESSION['id_usuario']) && isset($_SESSION['rol'])) {
             <h2 class="text-center mb-4">LISTADO DE CAMPAÑAS</h2>
             <table class="table table-striped table-bordered text-center">
                 <?php
+                $rol = $_SESSION['rol']; // Obtener el rol del usuario desde la sesión, por defecto 0 si no está definido
                 $encabezado_tablas = [];
                 switch ($rol) {
                     case 1:
@@ -79,7 +75,9 @@ if (isset($_SESSION['id_usuario']) && isset($_SESSION['rol'])) {
                 <tbody>
                     <?php
                     include_once 'funciones.php';
+
                     $campanias = obtenerCampanias();
+
                     if ($campanias && is_array($campanias)) {
                         foreach ($campanias as $campania) {
                             switch ($rol) {

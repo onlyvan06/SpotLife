@@ -1,3 +1,6 @@
+<?php
+require_once 'validar_sesion.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,42 +14,49 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles/registro.css">
     <link rel="stylesheet" href="styles/navbar.css">
-    <style>
-        html,
-        body {
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            display: grid;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            font-weight: normal;
-        }
-
-        label {
-            font-size: 1.3rem;
-            font-weight: normal;
-        }
-    </style>
+    <link rel="stylesheet" href="styles/registrar_campania.css">
 </head>
 
 <body>
     <?php
-    include("navbar.html");
+    include("navbar.php");
     ?>
+
+    <?php
+    include_once 'funciones.php';
+    $nombre_campania = isset($_POST['nombre_campania']) ? $_POST['nombre_campania'] : "";
+    $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : "";
+    $fecha_inicio = isset($_POST['fecha_inicio']) ? $_POST['fecha_inicio'] : "";
+    $fecha_fin = isset($_POST['fecha_fin']) ? $_POST['fecha_fin'] : "";
+    $centro_donacion = isset($_POST['centro_donacion']) ? $_POST['centro_donacion'] : "";
+
+    $mensaje = "";
+
+    if (isset($nombre_campania) && $nombre_campania <> "" && isset($descripcion) && $descripcion <> "" && isset($fecha_inicio) && $fecha_inicio <> "" && isset($centro_donacion) && $centro_donacion <> "") {
+
+        $registro_campania = registrarCampania($nombre_campania, $descripcion, $fecha_inicio, $fecha_fin, $centro_donacion);
+        if ($registro_campania) {
+            $mensaje = "<div class='alert alert-success text-center' id='overlay-exito' role='alert'> !Registro exitoso?¡ </div>";
+        } else {
+            $mensaje = "<div class='alert alert-danger text-center' role='alert'>Error al registrar</div>";
+        }
+    }
+    ?>
+
     <!-- Sección principal -->
     <div class="main-section">
         <div class="main-content">
-            <form action="" method="POST" name="registrar_campania" id="registrar_campania" class="container mt-5">
+            <form action="registrar_campania.php" method="POST" name="registrar_campania" name="registrar_campania" id="registrar_campania" class="container mt-5">
                 <h2 class="text-center mb-4">REGISTRAR CAMPAÑA</h2>
+                
+                <?php if ($mensaje != "") {
+                    echo $mensaje;
+                } ?>
+
                 <div class="mb-3">
                     <label for="nombre_campania" class="form-label">Nombre de la Campaña</label>
-                    <input type="text" class="form-control" id="nombre_campania" name="nombre_campania" required>
+                    <input type="text" class="form-control fs-4" id="nombre_campania" name="nombre_campania" required>
                 </div>
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Descripción</label>
@@ -54,19 +64,28 @@
                 </div>
                 <div class="mb-3">
                     <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
-                    <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
+                    <input type="date" class="form-control fs-4" id="fecha_inicio" name="fecha_inicio" required>
                 </div>
                 <div class="mb-3">
                     <label for="fecha_fin" class="form-label">Fecha de Fin</label>
-                    <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required>
+                    <input type="date" class="form-control fs-4" id="fecha_fin" name="fecha_fin" required>
                 </div>
-                <div class="mb-3">
+                <div class="mb-5">
                     <label for="centro_donacion" class="form-label">Centro de donación</label>
-                    <input type="date" class="form-control" id="centrod" name="centrod" required>
+                    <select class="form-control fs-4" id="centro_donacion" name="centro_donacion" required>
+                        <option value="" selected>Seleccione un centro de donación</option>
+                        <?php
+                        $centros = obtenerCentrosDonacion();
+                        foreach ($centros as $centro) {
+                            echo "<option value='" . $centro['id_centro_donacion'] . "'>" . $centro['centro_donacion'] . "</option>";
+                        }
+                        ?>
+                    </select>
                 </div>
-                <div class="mb-3 gap-4 d-flex justify-content-start">
-                    <button type="submit" class="btn btn-primary">Registrar Campaña</button>
-                    <a class="btn btn-primary" href="listado_campanias.php">Ver Campañas</a>
+                <div class="mb-5 gap-5 d-flex justify-content-start">
+                    <button type="submit" class="btn btn-primary" form="registrar_campania">REGISTRAR CAMPAÑA</button>
+                    <a class="btn btn-primary" href="listado_campanias.php">VER CAMPAÑAS</a>
+                    <button type="reset" class="btn btn-primary" form="registrar_campania">LIMPIAR</button>
                 </div>
             </form>
         </div>

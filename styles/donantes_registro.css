@@ -1,0 +1,47 @@
+    body,
+    html {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(to bottom right, #F95454, #933232);
+        font-size: 16px;
+    }
+
+    .left-panel {
+        background-color: white;
+        padding: 5rem;
+        box-shadow: 0 5px 5px #00000028;
+    }
+
+    .btn {
+        font-weight: bold;
+        color: white;
+        font-size: 1.2rem;
+        padding: 1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+    }
+
+    .btn-danger {
+        background: #F95454;
+        color: white;
+        border: none;
+    }
+
+    .btn-primary {
+        background: #0D92F4;
+        color: white;
+        border: none;
+    }
+
+    label {
+        font-weight: normal;
+        font-size: 1.5rem;
+    }

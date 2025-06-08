@@ -1,3 +1,7 @@
+<?php
+ require_once 'validar_sesion.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -11,14 +15,14 @@
             href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
             rel="stylesheet">
         <link rel="stylesheet" href="styles/historial.css">
+        <link rel="stylesheet" href="styles/navbar.css">
     </head>
     <body>
         <?php
-        include ("navbar.html");
+        include ("navbar.php");
         ?>
 
         <!-- Sección principal -->
-        <br>
         <div class="main-section text-center">
             <button class="btn donar-btn mt-3">TRANSFUCIONES</button>
             <button class="btn donar-btn mt-3">VER DONACIONES</button>

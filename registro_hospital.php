@@ -67,7 +67,7 @@
         <!-- Lado derecho -->
         <div class="col-md-7 right align-items-center">
             <h1 class="">REGÍSTRATE</h1>
-            <form action="" method="POST" class="input-group-lg d-flex flex-column w-50">
+            <form action="registro_hospital.php" method="POST" class="input-group-lg d-flex flex-column w-50">
                 <input type="text" name="nombre_hospital" id="nombre_hospital" class="form-control mb-2"
                     placeholder="Nombre de Hospital" required>
                 <input type="email" name="correo" id="correo" class="form-control mb-2" placeholder="Correo" required>

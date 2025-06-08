@@ -1,0 +1,86 @@
+body,
+html {
+    height: 100vh;
+    width: 100vw;
+}
+
+body {
+    background-color: white;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    color: black;
+    border: 2px solid #77CDFF;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 5px 5px #00000028;
+    
+}
+
+.container p{
+    font-weight: bold;
+}
+
+.question {
+    margin-bottom: 1rem;
+}
+
+.question label {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+.question input[type="radio"] {
+    margin-left: 1.2rem;
+    margin-right: 0.5rem;
+    transform: scale(2.0);
+}
+
+.buttons {
+    text-align: right;
+    margin-top: auto;
+    /* Empuja los botones hacia la parte inferior del contenedor */
+}
+
+.buttons button {
+    margin-left: 10px;
+}
+
+.btn {
+    font-weight: bold;
+    color: white;
+    font-size: 1.2rem;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: #0D92F4;
+    border: none;
+}
+
+.form-check-label {
+    margin-left: 0.5rem;
+}
+
+.navbar, .navbar * {
+    font-size: 1.5rem !important;
+}
+
+.navbar .navbar-brand,
+.navbar .navbar-brand span {
+    font-size: 2.5rem !important;
+}

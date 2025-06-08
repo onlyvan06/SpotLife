@@ -1,0 +1,143 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+}
+
+body {
+    background: linear-gradient(to bottom right, #F95454, #933232);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+.left-panel {
+    color: white;
+    padding: 100px;
+    text-align: center;
+}
+
+.left-panel h1 {
+
+    color: #ffffff;
+    font-weight: normal;
+
+}
+
+.left-panel p {
+
+    color: #ffffff;
+    font-weight: normal;
+
+}
+
+.right-panel {
+    background-color: white;
+    padding: 5rem;
+    box-shadow: 0 5px 5px #00000028;
+}
+
+.btn-custom {
+    margin-bottom: 1rem;
+    /* Aumenta el margen entre los botones */
+    padding: 2rem;
+    /* Aumenta el padding de los botones */
+}
+
+.btn {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-outline-primary {
+    background: transparent;
+    border: #0D92F4 2px solid;
+    color: #0D92F4;
+    border-color: #0D92F4;
+}
+
+.btn-danger {
+    background: #F95454;
+}
+
+.overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    display: none; /* Oculto por defecto */
+    z-index: 3;
+    /* Para asegurarnos de que se muestre por encima del resto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-mensaje {
+    margin: 15rem 10rem 15rem 10rem;
+    background: white;
+    color: black;
+    z-index: 4;
+    box-shadow: 0 5px 5px #00000028;
+}
+
+.btn-blue {
+    background: #2196f3;
+    color: white;
+    border: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+    padding: 1rem;
+}
+
+.btn-blue:hover{
+    color:white;
+    background: #0D92F4;
+    transform: scale(1.05)
+}
+
+.btn-alert{
+    background: #0D92F4;
+    border: 1px solid #d9534f;
+    transition: background 0.3s ease, transform 0.3s ease;
+    padding: 1rem;
+    color:white;
+    border:none;
+}
+
+.btn-alert:hover{
+    color:white;
+    background: #0D92F4;
+    transform: scale(1.05);
+}
+
+.btn-red-outline {
+    background: transparent;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+    transition: background 0.3s ease, transform 0.3s ease;
+    padding: 1rem;
+}
+
+.btn-red-outline:hover{
+    color:white;
+    background: #d9534f;
+    transform: scale(1.05)
+}
+
+#color1 {
+    color: #0D92F4;
+}
+
+#color2 {
+    color: #F95454;
+}

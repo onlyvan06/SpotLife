@@ -1,3 +1,11 @@
+<?php
+ require_once 'validar_sesion.php';
+?>
+
+<!-- Sección principal <pre>
+<?php print_r($_SESSION); ?>
+</pre>-->
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,7 +25,7 @@
 
 <body>
     <?php
-    include("navbar.html");
+    include("navbar.php");
     ?>
     <!-- Sección principal -->
     <div class="text-center">
@@ -32,3 +40,4 @@
 </body>
 
 </html>
+<?php
